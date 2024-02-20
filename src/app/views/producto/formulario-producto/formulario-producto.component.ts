@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, } from '@angul
 import { Producto } from '../producto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardModule, ColComponent, FormModule, RowComponent } from '@coreui/angular';
+import { TipoAccion } from 'src/app/shared/enums/acciones';
 
 @Component({
   selector: 'app-formulario-producto',
@@ -17,7 +18,7 @@ export class FormularioProductoComponent implements OnInit {
   public form!: FormGroup;
   public tituloFormulario: string = "";
 
-  @Input() accion: string = "";
+  @Input() accion!: TipoAccion;
   @Input() modelo: any;
   @Input() isDisabled: boolean = false;
 
@@ -28,10 +29,10 @@ export class FormularioProductoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.accion == "nuevo") { 
+    if (this.accion == TipoAccion.Create) { 
       this.tituloFormulario = 'Nuevo '; 
     }
-    else if (this.accion == "modificar") { 
+    else if (this.accion == TipoAccion.Update) { 
       this.tituloFormulario = 'Modificar '; 
     }
 

@@ -14,6 +14,7 @@ import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 
 import { Subject } from 'rxjs';
+import { TipoAccion } from '../../../shared/enums/acciones';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ListadoProductoComponent {
   public dtInstance!: Promise<DataTables.Api>;
   public dtOptions: DataTables.Settings = {};
   public dtTrigger: Subject<any> = new Subject<any>();
+  public StateEnum = TipoAccion.Read;
 
 
   idProducto: number = 0;
@@ -55,27 +57,20 @@ export class ListadoProductoComponent {
 
   }
 
-  // createItem(verticallyCenteredModal: any) {
-  //   if (this.productForm.valid) {
-  //     this._productoService.crearProducto(this.productForm.value).subscribe(a => {
-  //       console.log("Creado Correctamente")
-  //       this.Router.navigate(["/productos/listado-productos"])
-  //     }
-  //     );
-  //   }
-  // }
   nuevoProducto() {
-
-    this.openFormModal("nuevo");
+    this.StateEnum = TipoAccion.Create;
+    this.openFormModal();
   }
   modificarProducto(idProducto: number) {
+
     this.idProducto = idProducto;
-    this.openFormModal("modificar");
+    this.StateEnum = TipoAccion.Update;
+    this.openFormModal();
   }
 
-  openFormModal(accion: string) {
+  openFormModal() {
 
-    if (accion == "nuevo") {
+    if (this.StateEnum == TipoAccion.Create) {
       const modalRef = this.modalService.open(NuevoProductoComponent);
       modalRef.componentInstance.cciPadre = null;
       modalRef.result.then(
@@ -87,7 +82,7 @@ export class ListadoProductoComponent {
         () => {
         });
     }
-    else if (accion == "modificar") {
+    else if (this.StateEnum == TipoAccion.Update) {
       this._productoService.obtenerPorId(this.idProducto)
         .subscribe({
           next: this.handleUpdateResponse.bind(this),
@@ -106,9 +101,9 @@ export class ListadoProductoComponent {
     else {
 
       // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      //     var table = $('#tblProductos').DataTable();
-      //     dtInstance.destroy();
-      //     this.obtenerProductos();
+      // var table = $('#tblProductos').DataTable();
+      // dtInstance.destroy();
+      // this.obtenerProductos();
       // });
     };
   };
@@ -129,8 +124,8 @@ export class ListadoProductoComponent {
       });
   }
 
-  eliminarProducto(objeto: any, ) {
-    let mensaje ="Seguro quiere eliminar el registro : " + objeto.name
+  eliminarProducto(objeto: any,) {
+    let mensaje = "Seguro quiere eliminar el registro : " + objeto.name
     Swal.fire({
       title: "Estas seguro?",
       text: mensaje,
@@ -143,16 +138,16 @@ export class ListadoProductoComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this._productoService.DeleteID(objeto.id).subscribe(resultado => {
-     
+
           this.toastr.success('Datos eliminados correctamente.');
           // this.toastr.success('Hello world!', 'Toastr fun!');
           this.obtenerProductos();
-          
+
         })
-        
+
       }
     });
-   
+
   }
 
 }

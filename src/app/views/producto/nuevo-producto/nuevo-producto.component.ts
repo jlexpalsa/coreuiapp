@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductoService } from '../producto.service';
 import { Producto } from '../producto';
 import { FormularioProductoComponent } from '../formulario-producto/formulario-producto.component';
+import { TipoAccion } from 'src/app/shared/enums/acciones';
 
 @Component({
   selector: 'app-nuevo-producto',
@@ -13,6 +14,7 @@ import { FormularioProductoComponent } from '../formulario-producto/formulario-p
 })
 export class NuevoProductoComponent {
 
+  public StateEnum = TipoAccion.Create;
   constructor(private _productoService: ProductoService,public activeModal: NgbActiveModal) {
  
   }
