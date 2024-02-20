@@ -1,0 +1,49 @@
+
+    <c-col >
+        <form  cForm
+        (submit)="guardarCambios()"
+        [formGroup]="form" >
+ 
+        <c-card>
+            <div class="modal-header">
+                <h4 class="modal-title">Producto</h4>
+                <!-- <button type="button" (click)="activeModal.dismiss('')" cButtonClose>X
+                </button> -->
+                <!-- <button cButtonClose></button> -->
+              </div>
+            <c-card-body>                                                    
+                <c-col >
+                    <label cLabel  >Id</label>
+                    <input cFormControl  formControlName="id" type="number" />
+                   
+                </c-col>
+
+                    <c-col >
+                        <label cLabel >Nombre</label>
+                        <input cFormControl id="name" autocomplete="off"  formControlName="name" type="text" />
+                        
+                    </c-col>
+ 
+                  
+                                                                                 
+            </c-card-body>
+            <c-card-footer class="text-end">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    
+                    <a cButton class="btn btn-light e-md-2" (click)="activeModal.dismiss('')">
+                        Cancelar
+                    </a>
+    
+                    <button cButton class="btn btn-primary" type="submit" [disabled]="form.invalid" >
+                        Guardar
+                    </button>   
+                 
+                  </div>
+
+              
+               
+            </c-card-footer>
+        </c-card>
+    </form>
+    </c-col>
+
