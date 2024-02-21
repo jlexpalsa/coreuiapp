@@ -7,6 +7,7 @@ import { CardModule, ColComponent, FormModule, RowComponent } from '@coreui/angu
 import { TipoAccion } from 'src/app/utilidades/enums/acciones';
 import { MostrarErroresComponent } from '../../../utilidades/components/mostrar-errores/mostrar-errores.component';
 import { primeraLetraMayuscula } from 'src/app/utilidades/utilidades';
+import { FormValidationService } from 'src/app/utilidades/service/form-validation.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class FormularioProductoComponent implements OnInit {
   id = new FormControl('', { validators: [Validators.required, Validators.min(1), Validators.max(99)] });
   name = new FormControl('', { validators: [Validators.required, Validators.minLength(3), primeraLetraMayuscula()] });
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private _validationForm:FormValidationService) {
   }
 
   ngOnInit(): void {
@@ -65,6 +66,11 @@ export class FormularioProductoComponent implements OnInit {
     if (this.form.valid) {
       this.onSubmit.emit(this.form.value);
     }
+  }
+
+  obtenerError(campoNombre: string): string {
+    const campo = this.form.get(campoNombre);
+    return campo ? this._validationForm.obtenerMensajeError(campo) : '';
   }
 
   obtenerErrorCampoNombre() {

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormGroup, ValidatorFn } from "@angular/forms";
 
 export function parsearErroresAPI(response: any): string[] {
   const resultado: string[] = [];
@@ -61,3 +61,35 @@ export function primeraLetraMayuscula(): ValidatorFn {
       }
     };    
 }
+
+
+export function obtenerErrorCampo(form:FormGroup, campoName:string):String {
+  var campo = form.get([campoName]);
+
+  if (campo === null) {
+    return '*Este campo es requerido';
+  }
+  else {
+    if (campo.hasError('required')) {
+      return 'Este campo es requerido';
+    }
+
+    if (campo.hasError('minlength')) {
+      return 'La longitud mínima es de 3 caracteres'
+    }
+
+    if (campo.hasError('primeraLetraMayuscula')) {
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+    
+    if (campo.hasError('min')){
+      return 'El orden debe ser mayor a cero';
+    }  
+
+    if (campo.hasError('max')){
+      return 'El orden debe ser menor a 100';
+    }  
+  }
+  return '';
+}
+

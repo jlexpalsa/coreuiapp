@@ -22,6 +22,17 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Bodegas',
+    url: '/bodega',
+    iconComponent: { name: 'cil-notes' },
+    children: [
+      {
+        name: 'Listado Bodegas',
+        url: '/bodegas'
+      },
+    ]
+  },
+  {
     title: true,
     name: 'Theme'
   },

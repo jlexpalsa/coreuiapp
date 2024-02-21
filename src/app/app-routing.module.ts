@@ -75,6 +75,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/producto/producto.module').then((m) => m.ProductoModule)
       },
+      {
+        path: 'bodegas',
+        loadChildren: () =>
+          import('./views/bodegas/bodegas.module').then((m) => m.BodegasModule)
+      },
     ]
   },
   {
