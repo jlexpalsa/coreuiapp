@@ -6,7 +6,7 @@ import { ProductoService } from '../producto.service';
 import { Router } from '@angular/router';
 import { IconModule } from '@coreui/icons-angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { NuevoProductoComponent } from '../nuevo-producto/nuevo-producto.component';
 import Swal from 'sweetalert2';
 import { ModificarProductoComponent } from '../modificar-producto/modificar-producto.component';
@@ -14,14 +14,17 @@ import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 
 import { Subject } from 'rxjs';
-import { TipoAccion } from '../../../shared/enums/acciones';
+import { TipoAccion } from '../../../utilidades/enums/acciones';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-listado-producto',
   standalone: true,
-  imports: [GridModule, ButtonModule, ButtonGroupComponent, CardModule, TableModule, UtilitiesModule,
-    DocsComponentsModule, RouterTestingModule, IconModule, ModalModule, FormModule, ReactiveFormsModule, DataTablesModule, ToastModule],
+  imports: [CommonModule, GridModule, ButtonModule, ButtonGroupComponent, CardModule, TableModule, UtilitiesModule,
+    DocsComponentsModule, RouterTestingModule, IconModule, ModalModule, FormModule, ReactiveFormsModule, DataTablesModule, ToastModule,
+    NgxPaginationModule,NgbPagination],
   templateUrl: './listado-producto.component.html',
   styleUrl: './listado-producto.component.scss'
 })
@@ -33,6 +36,10 @@ export class ListadoProductoComponent {
   public dtOptions: DataTables.Settings = {};
   public dtTrigger: Subject<any> = new Subject<any>();
   public StateEnum = TipoAccion.Read;
+  public pageSize:number =10;
+  public page:number =0;
+
+
 
 
   idProducto: number = 0;
@@ -51,9 +58,10 @@ export class ListadoProductoComponent {
   obtenerProductos() {
     this._productoService.obtenerProductos().subscribe(a => {
       this.ProductosList = a
+      this.page = a.length;
     }
     );
-    console.log(this.ProductosList);
+    console.log(this.pageSize);
 
   }
 

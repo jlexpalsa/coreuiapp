@@ -16,8 +16,10 @@
             </tr>
         </thead>
         <tbody>
-            @for (producto of this.ProductosList; track $index) {
-            <tr>
+            <!-- @for (producto of this.ProductosList | paginate: { itemsPerPage: 10, currentPage: 1 }; track $index )  { -->
+            @for (producto of this.ProductosList | slice: (page-1) * pageSize : page * pageSize;  track $index )  {
+          
+            <tr >
                 <td>{{$index+1}}</td>
                 <td>{{producto.id}}</td>
                 <td>{{producto.name}}</td>
@@ -39,8 +41,13 @@
                 </td>
             </tr>
             }
+            <br>
+            <ngb-pagination [(page)]="page"
+                [pageSize]="pageSize"
+                [collectionSize]="this.ProductosList.length" />
     
         </tbody>
+       
     </table>
     
 </div>

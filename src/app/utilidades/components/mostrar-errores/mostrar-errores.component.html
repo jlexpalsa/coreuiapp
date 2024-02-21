@@ -1,0 +1,9 @@
+@if (errores.length > 0) {
+    <ul>
+        @for (err of errores; track $index) {
+            <c-alert color="danger">{{err}}</c-alert>
+        }
+    </ul>
+}
+
+

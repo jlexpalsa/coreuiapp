@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductoRoutingModule } from './producto-routing.module';
-import { FormularioProductoComponent } from './formulario-producto/formulario-producto.component';
-import { ListadoProductoComponent } from './listado-producto/listado-producto.component';
-
 
 @NgModule({
   declarations: [
@@ -13,8 +10,7 @@ import { ListadoProductoComponent } from './listado-producto/listado-producto.co
   ],
   imports: [
     CommonModule,
-    ProductoRoutingModule,
-    
+    ProductoRoutingModule,    
   ]
 })
 export class ProductoModule { }

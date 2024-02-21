@@ -3,7 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductoService } from '../producto.service';
 import { Producto } from '../producto';
 import { FormularioProductoComponent } from '../formulario-producto/formulario-producto.component';
-import { TipoAccion } from 'src/app/shared/enums/acciones';
+import { TipoAccion } from 'src/app/utilidades/enums/acciones';
+import { parsearErroresAPI } from 'src/app/utilidades/utilidades';
 
 @Component({
   selector: 'app-nuevo-producto',
@@ -15,6 +16,7 @@ import { TipoAccion } from 'src/app/shared/enums/acciones';
 export class NuevoProductoComponent {
 
   public StateEnum = TipoAccion.Create;
+  errores: string[] = [];
   constructor(private _productoService: ProductoService,public activeModal: NgbActiveModal) {
  
   }
@@ -25,7 +27,10 @@ export class NuevoProductoComponent {
       () => {  
         this.activeModal.close();                            
       },
-      (error) =>console.error(error)
+      (error) => {
+        console.log(error);
+        this.errores = parsearErroresAPI(error)
+      }
     );
   }
 }
