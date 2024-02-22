@@ -8,12 +8,16 @@ import { TipoAccion } from 'src/app/utilidades/enums/acciones';
 import { MostrarErroresComponent } from '../../../utilidades/components/mostrar-errores/mostrar-errores.component';
 import { primeraLetraMayuscula } from 'src/app/utilidades/utilidades';
 import { FormValidationService } from 'src/app/utilidades/service/form-validation.service';
+import { ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
+import { BodegaService } from '../../bodegas/services/bodega.service';
+import { Bodega } from '../../bodegas/bodegas';
+;
 
 
 @Component({
   selector: 'app-formulario-producto',
   standalone: true,
-  imports: [RowComponent, ColComponent, FormModule, ReactiveFormsModule, CardModule, MostrarErroresComponent],
+  imports: [RowComponent, ColComponent, FormModule, ReactiveFormsModule, CardModule, MostrarErroresComponent, ComboBoxModule],
   templateUrl: './formulario-producto.component.html',
   styleUrl: './formulario-producto.component.scss'
 })
@@ -21,6 +25,11 @@ export class FormularioProductoComponent implements OnInit {
 
   public form!: FormGroup;
   public tituloFormulario: string = "";
+  id = new FormControl('', { validators: [Validators.required, Validators.min(1), Validators.max(99)] });
+  name = new FormControl('', { validators: [Validators.required, Validators.minLength(3), primeraLetraMayuscula()] });
+  bodegaId = new FormControl('', { validators: [Validators.required] });
+  public  localFields: Object = { text:'name', value:'bodegaId'};
+  public selectedValue: number = 0;
 
   @Input() accion!: TipoAccion;
   @Input() modelo: any;
@@ -28,11 +37,13 @@ export class FormularioProductoComponent implements OnInit {
   @Input() errores: string[] = [];
   @Output() onSubmit: EventEmitter<Producto> = new EventEmitter<Producto>();
 
-  id = new FormControl('', { validators: [Validators.required, Validators.min(1), Validators.max(99)] });
-  name = new FormControl('', { validators: [Validators.required, Validators.minLength(3), primeraLetraMayuscula()] });
+  
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private _validationForm:FormValidationService) {
+  public data: any[] = [];
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
+    private _validationForm: FormValidationService, private _bodegaService: BodegaService) {
   }
+  
 
   ngOnInit(): void {
 
@@ -46,19 +57,30 @@ export class FormularioProductoComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: this.id,
       name: this.name,
+      bodegaId:this.bodegaId,
     });
     this.form.get('id')?.enable();
-
+    this.obtenerBodegas();
     if (this.modelo !== undefined) {
+      console.log(this.modelo);
       this.form.patchValue(
         {
 
           id: this.modelo.id,
           name: this.modelo.name,
+          bodegaId:this.modelo.bodegaId,
         }
       );
       this.form.get('id')?.disable();
     }
+   
+  }
+
+  async obtenerBodegas() {
+   await this._bodegaService.obtenerBodegas().subscribe(a => {
+      this.data = a;
+     
+    });   
   }
 
 
@@ -95,27 +117,25 @@ export class FormularioProductoComponent implements OnInit {
     return '';
   }
 
-  obtenerErrorCampoId(){
-    var campo = this.form.get(['id']);  
-   
-    if (campo === null)
-    {
+  obtenerErrorCampoId() {
+    var campo = this.form.get(['id']);
+
+    if (campo === null) {
       return '*Este campo es requerido';
     }
-    else
-    {
-      if (campo.hasError('required')){
+    else {
+      if (campo.hasError('required')) {
         return 'Este campo es requerido';
-      }    
- 
-      if (campo.hasError('min')){
+      }
+
+      if (campo.hasError('min')) {
         return 'El orden debe ser mayor a cero';
-      }  
- 
-      if (campo.hasError('max')){
+      }
+
+      if (campo.hasError('max')) {
         return 'El orden debe ser menor a 100';
-      }  
-    }      
+      }
+    }
     return '';
   }
 

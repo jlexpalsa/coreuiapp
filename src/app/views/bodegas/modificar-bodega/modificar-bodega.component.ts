@@ -24,7 +24,7 @@ export class ModificarBodegaComponent {
 
   guardarCambios(bodega: any) {
  
-    this._bodegasService.actualizarBodegas(this.modelo.id, bodega).subscribe(
+    this._bodegasService.actualizarBodegas(this.modelo.bodegaId, bodega).subscribe(
       () => {  
         this.activeModal.close();
         this.toastr.success('Datos actualizados correctamente.');                            

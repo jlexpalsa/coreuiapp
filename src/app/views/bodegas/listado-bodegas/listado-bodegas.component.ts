@@ -149,7 +149,7 @@ export class ListadoBodegasComponent {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
-        this._bodegaService.DeleteID(objeto.id).subscribe(resultado => {
+        this._bodegaService.DeleteID(objeto.bodegaId).subscribe(resultado => {
 
           this.toastr.success('Datos eliminados correctamente.');
           // this.toastr.success('Hello world!', 'Toastr fun!');

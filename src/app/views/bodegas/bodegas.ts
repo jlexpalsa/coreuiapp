@@ -1,6 +1,5 @@
 export interface Bodega{
-    codigo: number;
-    name: string;
-    
+    bodegaId: number;
+    name: string;    
     // menuAccion: MenuAccionRelDTO[];
 }

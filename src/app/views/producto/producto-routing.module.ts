@@ -13,10 +13,10 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'listado-productos'
+        redirectTo: 'listado'
       },
       {
-        path: 'listado-productos',
+        path: 'listado',
         component: ListadoProductoComponent,
         data: {
           title: 'Listado Productos'

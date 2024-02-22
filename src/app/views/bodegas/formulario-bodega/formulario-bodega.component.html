@@ -3,7 +3,7 @@
 
         <c-card>
             <div class="modal-header">
-                <h4 class="modal-title">Producto</h4>
+                <h4 class="modal-title">{{tituloFormulario}}</h4>
                 <!-- <button type="button" (click)="activeModal.dismiss('')" cButtonClose>X
 				</button> -->
                 <!-- <button cButtonClose></button> -->
@@ -11,8 +11,8 @@
             <c-card-body>
                 <c-col>
                     <label cLabel>Id</label>
-                    <input cFormControl formControlName="id" type="number" [valid]="id.valid" />
-                    <c-form-feedback [valid]="id.valid">{{obtenerError("id")}}</c-form-feedback>
+                    <input cFormControl formControlName="bodegaId" type="number" [valid]="bodegaId.valid" />
+                    <c-form-feedback [valid]="bodegaId.valid" º>{{obtenerError("bodegaId")}}</c-form-feedback>
                 </c-col>
 
                 <c-col>

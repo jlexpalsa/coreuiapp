@@ -12,17 +12,18 @@
                 <th scope="col">#</th>
                 <th scope="col">Código</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Nombre Bodega</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <!-- @for (producto of this.ProductosList | paginate: { itemsPerPage: 10, currentPage: 1 }; track $index )  { -->
             @for (producto of this.ProductosList | slice: (page-1) * pageSize : page * pageSize;  track $index )  {
-          
             <tr >
                 <td>{{$index+1}}</td>
                 <td>{{producto.id}}</td>
                 <td>{{producto.name}}</td>
+                <td>{{producto.bodega == null ? "Sin asignar":producto.bodega.name }}</td>
                 <td>
                     <c-button-group aria-label="Basic example" role="group">
                         <!-- <button cButton color="success">

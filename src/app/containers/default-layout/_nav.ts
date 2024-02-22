@@ -12,23 +12,23 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Productos',
-    url: '/producto',
+    url: '/productos',
     iconComponent: { name: 'cil-notes' },
     children: [
       {
         name: 'Listado Productos',
-        url: '/productos'
+        url: '/productos/listado'
       },
     ]
   },
   {
     name: 'Bodegas',
-    url: '/bodega',
+    url: '/bodegas',
     iconComponent: { name: 'cil-notes' },
     children: [
       {
         name: 'Listado Bodegas',
-        url: '/bodegas'
+        url: '/bodegas/listado'
       },
     ]
   },

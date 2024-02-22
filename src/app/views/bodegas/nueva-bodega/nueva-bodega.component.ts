@@ -3,9 +3,10 @@ import { FormularioBodegaComponent } from '../formulario-bodega/formulario-bodeg
 import { TipoAccion } from 'src/app/utilidades/enums/acciones';
 import { BodegaService } from '../services/bodega.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Bodega } from '../Bodegas';
+
 import { parsearErroresAPI } from 'src/app/utilidades/utilidades';
 import { ToastrService } from 'ngx-toastr';
+import { Bodega } from '../bodegas';
 
 @Component({
   selector: 'app-nueva-bodega',

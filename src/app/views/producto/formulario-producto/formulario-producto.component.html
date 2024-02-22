@@ -22,6 +22,10 @@
                     <c-form-feedback [valid]="name.valid">{{obtenerError("name")}}</c-form-feedback>
                 </c-col>
                 <c-col>
+                    <label cLabel>Bodega</label>
+                    <ejs-combobox formControlName="bodegaId" id='bodegaId' [dataSource]='data' [fields]='localFields'></ejs-combobox>
+                </c-col>
+                <c-col>
                     <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
                 </c-col>
 

@@ -17,23 +17,23 @@
         </thead>
         <tbody>
             <!-- @for (producto of this.ProductosList | paginate: { itemsPerPage: 10, currentPage: 1 }; track $index )  { -->
-            @for (producto of this.BodegasList | slice: (page-1) * pageSize : page * pageSize;  track $index )  {
+            @for (bodega of this.BodegasList | slice: (page-1) * pageSize : page * pageSize;  track $index )  {
           
             <tr >
                 <td>{{$index+1}}</td>
-                <td>{{producto.id}}</td>
-                <td>{{producto.name}}</td>
+                <td>{{bodega.bodegaId}}</td>
+                <td>{{bodega.name}}</td>
                 <td>
                     <c-button-group aria-label="Basic example" role="group">
                         <!-- <button cButton color="success">
                             <svg cIcon name="cil-pencil" size="sm" title="Numbered List Icon"></svg>
                         </button> -->
     
-                        <button (click)="modificarBodega(producto.id)" cButton class="btn btn-warning" title="Modificar Menú">
+                        <button (click)="modificarBodega(bodega.bodegaId)" cButton class="btn btn-warning" title="Modificar Menú">
                             <svg cIcon class="me-1" name="cil-pencil"></svg>                
                           </button>  
     
-                        <button cButton color="danger" (click)="eliminarBodega(producto)"> <svg cIcon name="cil-trash" size="sm"
+                        <button cButton color="danger" (click)="eliminarBodega(bodega)"> <svg cIcon name="cil-trash" size="sm"
                                 title="Numbered List Icon"></svg>
                         </button>
     

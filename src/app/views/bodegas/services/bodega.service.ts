@@ -17,8 +17,8 @@ export class BodegaService {
   crearBodega(Bodegas: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, Bodegas);
   }
-  actualizarBodegas(codigo: number, productData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${codigo}`, productData);
+  actualizarBodegas(codigo: number, bodegaData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${codigo}`, bodegaData);
   }
 
   DeleteID(id : number):Observable<any>{

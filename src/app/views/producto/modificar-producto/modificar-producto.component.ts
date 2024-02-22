@@ -23,7 +23,7 @@ export class ModificarProductoComponent {
 
 
   guardarCambios(producto: any) {
- 
+ console.log(producto)
     this._productoService.actualizarProducto(this.modelo.id, producto).subscribe(
       () => {  
         this.activeModal.close();                            

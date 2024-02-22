@@ -2,12 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TipoAccion } from '../../../utilidades/enums/acciones';
 
-import { Bodega } from '../Bodegas';
+
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { primeraLetraMayuscula } from '../../../utilidades/utilidades';
 import { CardModule, ColComponent, FormModule, RowComponent } from '@coreui/angular';
 import { MostrarErroresComponent } from 'src/app/utilidades/components/mostrar-errores/mostrar-errores.component';
 import { FormValidationService } from '../../../utilidades/service/form-validation.service';
+import { Bodega } from '../bodegas';
 
 @Component({
   selector: 'app-formulario-bodega',
@@ -26,7 +27,7 @@ export class FormularioBodegaComponent {
   @Input() errores: string[] = [];
   @Output() onSubmit: EventEmitter<Bodega> = new EventEmitter<Bodega>();
 
-  id = new FormControl('', { validators: [Validators.required, Validators.min(1), Validators.max(99)] });
+  bodegaId = new FormControl('', { validators: [Validators.required, Validators.min(1), Validators.max(99)] });
   name = new FormControl('', { validators: [Validators.required, Validators.minLength(3), primeraLetraMayuscula()] });
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private _validationForm: FormValidationService ) {
@@ -42,7 +43,7 @@ export class FormularioBodegaComponent {
     }
 
     this.form = this.formBuilder.group({
-      id: this.id,
+      bodegaId: this.bodegaId,
       name: this.name,
     });
     this.form.get('id')?.enable();
@@ -50,12 +51,11 @@ export class FormularioBodegaComponent {
     if (this.modelo !== undefined) {
       this.form.patchValue(
         {
-
-          id: this.modelo.id,
+          bodegaId: this.modelo.bodegaId,
           name: this.modelo.name,
         }
       );
-      this.form.get('id')?.disable();
+      this.form.get('bodegaId')?.disable();
     }
   }
 
@@ -67,8 +67,14 @@ export class FormularioBodegaComponent {
   }
 
   obtenerError(campoNombre: string): string {
+   
     const campo = this.form.get(campoNombre);
-    return campo ? this._validationForm.obtenerMensajeError(campo) : '';
+
+    if (campo && campo.touched) {
+      return this._validationForm.obtenerMensajeError(campo);
+    }
+
+    return '';
   }
 
 }

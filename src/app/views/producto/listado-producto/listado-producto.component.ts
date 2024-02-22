@@ -47,6 +47,7 @@ export class ListadoProductoComponent {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       Id: ['', Validators.required],
+      CodigoProducto: ['', Validators.required],
     });
   }
 
