@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, GridModule, ButtonModule, ButtonGroupComponent, CardModule, TableModule, UtilitiesModule,
     DocsComponentsModule, RouterTestingModule, IconModule, ModalModule, FormModule, ReactiveFormsModule, DataTablesModule, ToastModule,
-    NgxPaginationModule,NgbPagination],
+    NgxPaginationModule, NgbPagination],
   templateUrl: './listado-producto.component.html',
   styleUrl: './listado-producto.component.scss'
 })
@@ -36,8 +36,8 @@ export class ListadoProductoComponent {
   public dtOptions: DataTables.Settings = {};
   public dtTrigger: Subject<any> = new Subject<any>();
   public StateEnum = TipoAccion.Read;
-  public pageSize:number =10;
-  public page:number =0;
+  public pageSize: number = 10;
+  public page: number = 0;
 
 
 

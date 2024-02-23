@@ -10,7 +10,7 @@ import { primeraLetraMayuscula } from 'src/app/utilidades/utilidades';
 import { FormValidationService } from 'src/app/utilidades/service/form-validation.service';
 import { ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { BodegaService } from '../../bodegas/services/bodega.service';
-import { Bodega } from '../../bodegas/bodegas';
+
 ;
 
 
@@ -79,7 +79,6 @@ export class FormularioProductoComponent implements OnInit {
   async obtenerBodegas() {
    await this._bodegaService.obtenerBodegas().subscribe(a => {
       this.data = a;
-     
     });   
   }
 

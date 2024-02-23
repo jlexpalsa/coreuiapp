@@ -1,0 +1,103 @@
+<c-col>
+    <form cForm [formGroup]="form">
+
+        <c-card>
+            <div class="modal-header">
+                <!-- <h4 class="modal-title">{{tituloFormulario}}</h4> -->
+                <!-- <button type="button" (click)="activeModal.dismiss('')" cButtonClose>X
+				</button> -->
+                <!-- <button cButtonClose></button> -->
+            </div>
+            <c-card-body>
+                <c-row class="text-center">
+                    <ejs-menu [items]='menuItems'></ejs-menu>`
+                </c-row>
+                
+                <c-row>
+                    <c-col>
+                        <label cLabel>Secuencial</label>
+                        <input cFormControl formControlName="facturaId" type="number" />
+                        <!-- <c-form-feedback [valid]="bodegaId.valid" º>{{obtenerError("bodegaId")}}</c-form-feedback> -->
+                    </c-col>
+                    <c-col>
+                        <label cLabel>Fecha</label>
+                        <input cFormControl id="fecha" autocomplete="off" formControlName="fecha" type="date" />
+                        <!-- <c-form-feedback [valid]="fecha.valid">{{obtenerError("name")}}</c-form-feedback> -->
+                    </c-col>
+
+                </c-row>
+                <c-row>
+                    <c-col>
+                        <label cLabel></label>
+                        <ejs-combobox  placeholder="Ingrese la bodega" formControlName="bodegaId" id='bodegaId' [dataSource]='data' [fields]='localFields'></ejs-combobox>
+                    </c-col>
+
+                    <c-col>
+                        <label cLabel>Total</label>
+                        <input cFormControl id="facturatotal" autocomplete="off" formControlName="facturatotal"
+                            type="text" />
+                        <!-- <c-form-feedback [valid]="name.valid">{{obtenerError("name")}}</c-form-feedback> -->
+                    </c-col>
+                </c-row>
+
+
+
+                <c-col>
+                    <label cLabel>Observacion</label>
+                    <input cFormControl id="name" autocomplete="off" formControlName="observacion" type="text" />
+                    <!-- <c-form-feedback [valid]="observacion.valid">{{obtenerError("name")}}</c-form-feedback> -->
+                </c-col>
+
+                <!-- <c-col>
+                    <br>
+                    <ejs-grid [dataSource]='data' allowPaging='true'  height='370'
+                        [pageSettings]='pageSettings' [allowResizing]="true" showColumnMenu='true'
+                        [groupSettings]='groupOptions' allowFiltering='true' [filterSettings]='filterSettings'
+                        SortAscending>
+                        <e-columns>
+                            <e-column field='productoId' headerText='Código Producto' width='120'
+                                textAlign='Left'></e-column>
+                            <e-column field='productoName' headerText='Nombre Producto' width='150'
+                                edit='editParams'></e-column>
+
+                            <e-column field='cantidad' headerText='Cantidad' width='120' textAlign='Right'></e-column>
+                            <e-column field='precio' headerText='Precio' width='120' format='C2'
+                                textAlign='Right'></e-column>
+                            <e-column field='total' headerText='Total' width='120' format='C2'
+                                textAlign='Right'></e-column>
+
+                            <e-column headerText='Acciones' width='160' [commands]='commands'></e-column>
+
+                        </e-columns>
+                    </ejs-grid>
+                </c-col> -->
+                <c-col>
+                    <br>
+                    <ejs-grid #gridDetalle [dataSource]='data' [allowPaging]='true' [pageSettings]="pageSettings" [allowFiltering]='true' [filterSettings]="filterSettings"
+                    [editSettings]='editOptions' [toolbar]='toolbarItems' [allowSorting]='true' (actionComplete)='actionComplete($event)'>
+                        <e-columns>
+                            <e-column field='CustomerID' headerText='Productos' width='50%' foreignKeyValue='name' foreignKeyField='id' [dataSource]='productosList' [validationRules]='orderidrules'></e-column>
+                            <e-column field='cantidad' headerText='Cantidad'  width='15%' editType='numericedit' width='120' textAlign='Right' [validationRules]='orderidrules'></e-column>
+                            <e-column field='precio' headerText='Precio' width='15%' editType='numericedit' width='120' format='C2' textAlign='Right' [validationRules]='orderidrules' ></e-column>
+                            <e-column field='total'  width='20%' headerText='Total' width='120' format='C2' textAlign='Right'></e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </c-col>
+
+
+
+            </c-card-body>
+            <c-card-footer class="text-end">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a cButton class="btn btn-light e-md-2">
+                        Cancelar
+                    </a>
+                    <button cButton class="btn btn-primary" type="submit">
+                        Guardar
+                    </button>
+                </div>
+
+            </c-card-footer>
+        </c-card>
+    </form>
+</c-col>

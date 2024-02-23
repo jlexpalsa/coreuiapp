@@ -33,6 +33,12 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Facturas',
+    url: '/facturas',
+    iconComponent: { name: 'cil-notes' },
+    
+  },
+  {
     title: true,
     name: 'Theme'
   },

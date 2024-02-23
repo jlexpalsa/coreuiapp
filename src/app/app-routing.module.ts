@@ -80,6 +80,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/bodegas/bodegas.module').then((m) => m.BodegasModule)
       },
+      {
+        path: 'facturas',
+        loadChildren: () =>
+        import('./views/factura/factura.module').then((m) => m.FacturaModule)
+      },
     ]
   },
   {
